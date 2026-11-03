@@ -1,10 +1,10 @@
-package com.example.Lambdanet;
+package com.example.Arbitrio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LambdanetApplicationTests {
+class ArbitrioApplicationTests {
 
 	@Test
 	void contextLoads() {

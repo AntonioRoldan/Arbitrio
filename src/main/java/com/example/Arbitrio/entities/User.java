@@ -1,7 +1,6 @@
 package com.example.Arbitrio.entities;
 
 
-import com.example.Lambdanet.utils.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -51,12 +50,5 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {return username;}
 
-    @Column(name = "email_verified")
-    private boolean emailVerified = false;
 
-    @Column(name = "refresh_token", length = 500)
-    private String refreshToken;
-
-    @Column(name = "refresh_token_expires_at")
-    private LocalDateTime refreshTokenExpiresAt;
 }

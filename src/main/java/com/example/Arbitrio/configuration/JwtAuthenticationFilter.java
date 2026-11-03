@@ -19,6 +19,7 @@ import java.util.List;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
     private final JwtService jwtService;
 
     public JwtAuthenticationFilter(JwtService jwtService){

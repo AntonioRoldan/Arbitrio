@@ -1,4 +1,4 @@
-package com.example.Lambdanet.utils;
+package com.example.Arbitrio.utils;
 
 public enum Role {
     USER,
