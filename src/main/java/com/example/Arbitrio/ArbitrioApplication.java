@@ -1,13 +1,13 @@
-package com.example.Lambdanet;
+package com.example.Arbitrio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LambdanetApplication {
+public class ArbitrioApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LambdanetApplication.class, args);
+		SpringApplication.run(ArbitrioApplication.class, args);
 	}
 
 }
