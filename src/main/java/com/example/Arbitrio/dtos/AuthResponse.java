@@ -1,4 +1,4 @@
 package com.example.Arbitrio.dtos;
 
-public record AuthResponse(String token, String error) {}
+public record AuthResponse(String token) {}
 

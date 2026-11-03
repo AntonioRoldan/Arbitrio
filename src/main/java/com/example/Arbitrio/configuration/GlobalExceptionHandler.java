@@ -1,14 +1,11 @@
-package com.example.Arbitrio.controllers;
+package com.example.Arbitrio.configuration;
 
-import com.example.Arbitrio.dtos.AuthResponse;
 import com.example.Arbitrio.dtos.ErrorResponse;
 import com.example.Arbitrio.exceptions.InvalidRoleException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

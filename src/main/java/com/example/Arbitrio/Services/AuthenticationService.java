@@ -32,7 +32,7 @@ public class AuthenticationService {
     }
 
     public String register(RegisterRequest request) {
-        List<String> validRoles = new ArrayList<>(List.of("COMPANY_ADMIN", "LEGAL_ADMIN", "PROCUREMENT_MANAGER", "FINANCE_ADMIN", "VENDOR_ADMIN", "VENDOR_BILLING"));
+        List<String> validRoles = new ArrayList<>(List.of("COMPANY_ADMIN", "LEGAL_ADMIN", "PROCUREMENT_MANAGER", "FINANCE_ADMIN", "VENDOR_ADMIN"));
         if (!validRoles.contains(request.Role())){
             throw new InvalidRoleException("Invalid role inserted");
         }
