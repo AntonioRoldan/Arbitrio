@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // Público para todos
                         .requestMatchers("/api/legal/**").hasRole("LEGAL_ADMIN")
+                        .requestMatchers("/api/operator/**").hasRole("OPERATOR_ADMIN")
                         .requestMatchers("/api/finance/**").hasRole("FINANCE_ADMIN")
                         .requestMatchers("/api/company/**").hasRole("COMPANY_ADMIN")
                         .requestMatchers("/api/procurement/**").hasRole("PROCUREMENT_MANAGER")
