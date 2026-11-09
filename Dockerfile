@@ -1,6 +1,3 @@
-FROM ubuntu:latest
-LABEL authors="antonio"
-
 # Etapa 1: Construcción de la aplicación
 FROM eclipse-temurin:17-jdk-jammy AS build
 WORKDIR /app
@@ -9,7 +6,7 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
-# Descargar dependencias (para aprovechar la caché de Docker)
+# Descargar dependencias (aprovechando la caché de Docker)
 RUN ./mvnw dependency:go-offline
 
 # Copiar el código fuente
@@ -20,6 +17,7 @@ RUN ./mvnw clean package -DskipTests
 
 # Etapa 2: Imagen final de ejecución
 FROM eclipse-temurin:17-jre-jammy
+LABEL authors="antonio"
 WORKDIR /app
 
 # Copiar el jar generado desde la etapa de construcción
