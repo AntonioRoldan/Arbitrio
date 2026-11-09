@@ -35,6 +35,9 @@ public class AuthenticationService {
     }
 
     public Long registerCompany(RegisterCompanyRequest request){
+        if(request.role() == null){
+            throw new InvalidRoleException("Role is null");
+        }
         if(!request.role().equals("COMPANY_ADMIN")){
             throw new InvalidRoleException("Invalid role inserted");
         }
