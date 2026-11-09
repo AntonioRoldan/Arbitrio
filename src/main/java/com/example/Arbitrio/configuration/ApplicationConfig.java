@@ -15,8 +15,4 @@ public class ApplicationConfig {
         return new BCryptPasswordEncoder(); // Algoritmo seguro de encriptación
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
 }
