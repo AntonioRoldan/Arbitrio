@@ -38,13 +38,13 @@ public class AuthenticationService {
         if(!request.role().equals("COMPANY_ADMIN")){
             throw new InvalidRoleException("Invalid role inserted");
         }
-        User user = new User();
-        user.setUsername(request.username());
-        user.setPassword(request.password());
-        user.setRole(request.role());
-        userRepository.save(user);
+        User company = new User();
+        company.setUsername(request.username());
+        company.setPassword(request.password());
+        company.setRole(request.role());
+        userRepository.save(company);
 
-        return user.getId();
+        return company.getId();
     }
 
     public Long loginCompany(CompanyLoginRequest request){
@@ -55,10 +55,10 @@ public class AuthenticationService {
                 )
         );
 
-        User user = userRepository.findByUsername(request.username())
+        User company = userRepository.findByUsername(request.username())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return user.getId();
+        return company.getId();
     }
 
     public String registerEmployee(RegisterRequest request) {
