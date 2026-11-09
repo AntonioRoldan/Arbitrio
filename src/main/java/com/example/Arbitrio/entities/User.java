@@ -38,6 +38,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String role; // Ej: "ADMIN" o "USER"
 
+    @Column()
+    private Long companyId;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Spring Security por convenio espera el prefijo "ROLE_"

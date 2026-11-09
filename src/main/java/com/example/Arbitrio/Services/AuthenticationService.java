@@ -1,9 +1,12 @@
 package com.example.Arbitrio.Services;
 
+import com.example.Arbitrio.dtos.CompanyLoginRequest;
 import com.example.Arbitrio.dtos.LoginRequest;
+import com.example.Arbitrio.dtos.RegisterCompanyRequest;
 import com.example.Arbitrio.dtos.RegisterRequest;
 import com.example.Arbitrio.entities.User;
 import com.example.Arbitrio.exceptions.InvalidRoleException;
+import com.example.Arbitrio.exceptions.NoCompanyIdWasProvidedForEmployeeAuth;
 import com.example.Arbitrio.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,23 +34,60 @@ public class AuthenticationService {
         this.authenticationManager = authenticationManager;
     }
 
-    public String register(RegisterRequest request) {
-        List<String> validRoles = new ArrayList<>(List.of("COMPANY_ADMIN", "LEGAL_ADMIN", "PROCUREMENT_MANAGER", "FINANCE_ADMIN", "VENDOR_ADMIN"));
-        if (!validRoles.contains(request.Role())){
+    public Long registerCompany(RegisterCompanyRequest request){
+        if(!request.role().equals("COMPANY_ADMIN")){
             throw new InvalidRoleException("Invalid role inserted");
         }
         User user = new User();
         user.setUsername(request.username());
-
-        user.setPassword(passwordEncoder.encode(request.password()));
-
-        user.setRole(request.Role());
+        user.setPassword(request.password());
+        user.setRole(request.role());
         userRepository.save(user);
 
-        return jwtService.generateToken(user);
+        return user.getId();
     }
 
-    public String authenticate(LoginRequest request) {
+    public Long loginCompany(CompanyLoginRequest request){
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.username(),
+                        request.password()
+                )
+        );
+
+        User user = userRepository.findByUsername(request.username())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return user.getId();
+    }
+
+    public String registerEmployee(RegisterRequest request) {
+        List<String> validRoles = new ArrayList<>(List.of("LEGAL_ADMIN", "PROCUREMENT_MANAGER", "FINANCE_ADMIN", "VENDOR_ADMIN"));
+        if (!validRoles.contains(request.role())){
+            throw new InvalidRoleException("Invalid role inserted");
+        }
+        User company = userRepository.findById(request.companyId()).orElseThrow( () ->
+                new NoCompanyIdWasProvidedForEmployeeAuth("Employees must provide a company id for a registered company when authenticating"));
+
+        User employee = new User();
+        employee.setUsername(request.username());
+
+        employee.setPassword(passwordEncoder.encode(request.password()));
+
+        employee.setCompanyId(company.getId());
+
+        employee.setRole(request.role());
+        userRepository.save(employee);
+
+        return jwtService.generateToken(employee);
+    }
+
+    public String authenticateEmployee(LoginRequest request) {
+
+        User company = userRepository.findById(request.companyId()).orElseThrow(
+                () -> new NoCompanyIdWasProvidedForEmployeeAuth("Employees must provide a company id for a registered company when authenticating")
+        );
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.username(),
