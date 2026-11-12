@@ -80,10 +80,12 @@ public class AuthenticationService {
     }
 
     public String registerEmployee(RegisterRequest request) {
+        System.out.println("dO I RUN?");
         List<String> validRoles = new ArrayList<>(List.of("LEGAL_ADMIN", "PROCUREMENT_MANAGER", "FINANCE_ADMIN", "VENDOR_ADMIN"));
         if (!validRoles.contains(request.role())){
             throw new InvalidRoleException("Invalid role inserted");
         }
+
         User company = userRepository.findById(request.companyId()).orElseThrow( () ->
                 new NoCompanyIdWasProvidedForEmployeeAuthException("Employees must provide a company id for a registered company when authenticating"));
 

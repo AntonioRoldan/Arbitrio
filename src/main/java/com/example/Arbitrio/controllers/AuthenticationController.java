@@ -27,14 +27,16 @@ public class AuthenticationController {
         return ResponseEntity.ok(new CompanyAuthResponse(companyId));
     }
 
-    @PostMapping("/register/employee")
+    @PostMapping("/login/employee")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         String token = authService.authenticateEmployee(request);
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
-    @PostMapping("/login/employee")
+    @PostMapping("/register/employee")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        System.out.println("dO I RUN?");
+
         String token = authService.registerEmployee(request);
         return ResponseEntity.ok(new AuthResponse(token));
     }
