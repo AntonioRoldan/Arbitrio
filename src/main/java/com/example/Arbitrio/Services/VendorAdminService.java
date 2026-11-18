@@ -27,7 +27,7 @@ public class VendorAdminService {
         return userRoleDataProviderInterface.getUserRoleSpecificData(request);
     }
 
-    public <T> T updateRegistrationRequestProcessStatus() { //Runs specific statemachine for this user role
+    public <TRequest, TResponse> TResponse makeRegistrationRequestAlteringRegistrationRequestProcessStatus(TRequest request) { //Runs specific statemachine for this user role
         return null;
     }
 

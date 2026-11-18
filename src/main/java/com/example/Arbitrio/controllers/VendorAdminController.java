@@ -15,26 +15,20 @@ public class VendorAdminController {
 
     private final VendorAdminService vendorAdminService;
 
-    private final List<UserRoleDataProviderInterface> userRoleDataProvidersInterfaces;
-
-    public VendorAdminController(VendorAdminService vendorAdminService, List<UserRoleDataProviderInterface> userRoleDataProvidersInterfaces) {
+    public VendorAdminController(VendorAdminService vendorAdminService) {
         this.vendorAdminService = vendorAdminService;
-        this.userRoleDataProvidersInterfaces = userRoleDataProvidersInterfaces;
+
     }
 
     @GetMapping("/companies")
     public ResponseEntity<VendorGetCompaniesResponse> registerCompany(@RequestBody VendorGetRequest request) {
-        UserRoleDataProviderInterface userRoleDataProviderInterface = userRoleDataProvidersInterfaces.stream()
-                .filter(VendorAdminGetDataCompaniesProviderService.class::isInstance)
-                .findFirst()
-                .orElseThrow();
-        List<Long> companiesToRegisterAsVendorFor = userRoleDataProviderInterface.getUserRoleSpecificData(request);
-        return ResponseEntity.ok(new VendorGetCompaniesResponse(companiesToRegisterAsVendorFor));
+        VendorGetCompaniesResponse reponse = this.vendorAdminService.getCompaniesData(request);
+        return ResponseEntity.ok(reponse);
     }
 
     @PostMapping("/make_request_to_commpany") //This is the only process' status changing method
     public ResponseEntity<VendorMakeRegistrationRequestResponse> makeRegistrationRequestToCompany(@RequestBody VendorMakeRegistrationRequestRequest request){
-        VendorMakeRegistrationRequestResponse response = vendorAdminService.postData(request);
+        VendorMakeRegistrationRequestResponse response = vendorAdminService.makeRegistrationRequestAlteringRegistrationRequestProcessStatus(request);
         return ResponseEntity.ok(response);
     }
 
