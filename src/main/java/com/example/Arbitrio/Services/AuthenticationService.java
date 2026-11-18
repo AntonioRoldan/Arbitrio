@@ -1,10 +1,10 @@
 package com.example.Arbitrio.Services;
 
-import com.example.Arbitrio.dtos.CompanyLoginRequest;
-import com.example.Arbitrio.dtos.LoginRequest;
-import com.example.Arbitrio.dtos.RegisterCompanyRequest;
-import com.example.Arbitrio.dtos.RegisterRequest;
-import com.example.Arbitrio.entities.User;
+import com.example.Arbitrio.dtos.Auth.CompanyLoginRequest;
+import com.example.Arbitrio.dtos.Auth.LoginRequest;
+import com.example.Arbitrio.dtos.Auth.RegisterCompanyRequest;
+import com.example.Arbitrio.dtos.Auth.RegisterRequest;
+import com.example.Arbitrio.entities.User.User;
 import com.example.Arbitrio.exceptions.InvalidRoleException;
 import com.example.Arbitrio.exceptions.NoCompanyIdWasProvidedForEmployeeAuthException;
 import com.example.Arbitrio.exceptions.UserAlreadyExistsException;

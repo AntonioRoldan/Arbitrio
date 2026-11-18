@@ -1,6 +1,5 @@
-package com.example.Arbitrio.entities;
+package com.example.Arbitrio.entities.VendorRegistrationRequest;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,7 +35,6 @@ public class VendorRegistrationRequestDocuments {
 
     @Column(nullable = true)
     private String owner; //a string like "VENDOR" or a string like "COMPANY"
-
 
     @ToString.Exclude
     @Column(nullable = true)

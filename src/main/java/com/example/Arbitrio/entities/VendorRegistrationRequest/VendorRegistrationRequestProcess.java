@@ -1,4 +1,4 @@
-package com.example.Arbitrio.entities;
+package com.example.Arbitrio.entities.VendorRegistrationRequest;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.example.Arbitrio.controllers;
 
 import com.example.Arbitrio.Services.AuthenticationService;
-import com.example.Arbitrio.dtos.*;
+import com.example.Arbitrio.dtos.Auth.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

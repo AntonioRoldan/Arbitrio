@@ -1,4 +1,4 @@
-package com.example.Arbitrio.dtos;
+package com.example.Arbitrio.dtos.VendorAdmin;
 
 public record VendorMakeRegistrationRequestRequest() {
 }

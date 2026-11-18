@@ -1,6 +1,7 @@
 package com.example.Arbitrio.configuration;
 
-import com.example.Arbitrio.dtos.ErrorResponse;
+import com.example.Arbitrio.dtos.Error.ErrorResponse;
+import com.example.Arbitrio.exceptions.FilesNotUploadedException;
 import com.example.Arbitrio.exceptions.InvalidRoleException;
 import com.example.Arbitrio.exceptions.NoCompanyIdWasProvidedForEmployeeAuthException;
 import com.example.Arbitrio.exceptions.UserAlreadyExistsException;
@@ -37,4 +38,11 @@ public class GlobalExceptionHandler {
                 .body(errorResponse);
     }
 
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> filesNotUploaded(FilesNotUploadedException filesNotUploadedException) {
+        ErrorResponse errorResponse = new ErrorResponse(filesNotUploadedException.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(errorResponse);
+    }
 }

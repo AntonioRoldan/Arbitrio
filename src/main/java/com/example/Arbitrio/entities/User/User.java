@@ -1,4 +1,4 @@
-package com.example.Arbitrio.entities;
+package com.example.Arbitrio.entities.User;
 
 
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package com.example.Arbitrio.dtos;
+package com.example.Arbitrio.dtos.VendorAdmin;
 
 import java.util.List;
 

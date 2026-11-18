@@ -1,6 +1,6 @@
 package com.example.Arbitrio.repository;
 
-import com.example.Arbitrio.entities.User;
+import com.example.Arbitrio.entities.User.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
