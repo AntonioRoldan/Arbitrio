@@ -1,36 +1,34 @@
 package com.example.Arbitrio.Services;
 
-import com.example.Arbitrio.utils.UserRoleActionsInterface;
+import com.example.Arbitrio.dtos.VendorGetCompaniesResponse;
+import com.example.Arbitrio.dtos.VendorGetRequest;
 import com.example.Arbitrio.utils.UserRoleDataProviderInterface;
 import com.example.Arbitrio.utils.UserRoleFiniteStateMachineProviderInterface;
 
-public class VendorAdminService implements UserRoleActionsInterface {
+import java.util.List;
 
-    private UserRoleDataProviderInterface userRoleDataProvider;
+public class VendorAdminService {
 
-    private UserRoleFiniteStateMachineProviderInterface userRoleFiniteStateMachineProvider;
-    @Override
-    public <T, TRequest> T getData(TRequest request) {
-        return this.userRoleDataProvider.getUserRoleSpecificData();
+    private List<UserRoleDataProviderInterface> userRoleDataProviders;
+
+    private List<UserRoleFiniteStateMachineProviderInterface> userRoleFiniteStateMachineProviders;
+
+    public VendorAdminService(List<UserRoleFiniteStateMachineProviderInterface> userRoleFiniteStateMachineProviders, List<UserRoleDataProviderInterface> userRoleDataProvidersInterfaces){
+        this.userRoleFiniteStateMachineProviders = userRoleFiniteStateMachineProviders;
+        this.userRoleDataProviders = userRoleDataProvidersInterfaces;
     }
 
-    @Override
-    public <T, TRequest> T postData(TRequest request) {
+    public VendorGetCompaniesResponse getCompaniesData(VendorGetRequest request)
+    {
+        UserRoleDataProviderInterface userRoleDataProviderInterface = this.userRoleDataProviders.stream()
+                .filter(VendorAdminGetDataCompaniesProviderService.class::isInstance)
+                .findFirst()
+                .orElseThrow();
+        return userRoleDataProviderInterface.getUserRoleSpecificData(request);
+    }
+
+    public <T> T updateRegistrationRequestProcessStatus() { //Runs specific statemachine for this user role
         return null;
     }
 
-    @Override
-    public <T> T performOperation() { //Runs specific statemachine for this user role
-        return this.userRoleFiniteStateMachineProvider.run();
-    }
-
-    @Override
-    public void setUserRoleFiniteStateMachineProvider(UserRoleFiniteStateMachineProviderInterface userRoleFiniteStateMachineProvider) {
-        this.userRoleFiniteStateMachineProvider = userRoleFiniteStateMachineProvider;
-    }
-
-    @Override
-    public void setUserRoleDataProvider(UserRoleDataProviderInterface userRoleDataProvider) {
-        this.userRoleDataProvider = userRoleDataProvider;
-    }
 }

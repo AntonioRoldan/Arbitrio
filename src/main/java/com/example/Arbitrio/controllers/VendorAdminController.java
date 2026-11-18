@@ -28,8 +28,7 @@ public class VendorAdminController {
                 .filter(VendorAdminGetDataCompaniesProviderService.class::isInstance)
                 .findFirst()
                 .orElseThrow();
-        vendorAdminService.setUserRoleDataProvider(userRoleDataProviderInterface);
-        List<Long> companiesToRegisterAsVendorFor = vendorAdminService.getData(request);
+        List<Long> companiesToRegisterAsVendorFor = userRoleDataProviderInterface.getUserRoleSpecificData(request);
         return ResponseEntity.ok(new VendorGetCompaniesResponse(companiesToRegisterAsVendorFor));
     }
 
